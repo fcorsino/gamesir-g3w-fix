@@ -5,6 +5,11 @@ set -e
 install_prefix="/usr/local/bin"
 gamesir_g3w_fix_script="$install_prefix/gamesir-g3w-fix.py"
 
+# Output of lsusb|grep 360 for a Gamesir G3w is:
+# Bus 001 Device 049: ID 045e:028e Microsoft Corp. Xbox360 Controller
+VENDOR_ID=045e
+PRODUCT_ID=028e
+
 install_gamesir_g3w_fix() {
 
   echo "Creating fix script for Gamesir G3w"
@@ -34,8 +39,7 @@ else:
     dev = usb.core.find(find_all=True)
 
     for d in dev:
-        # Bus 001 Device 015: ID 045e:028e Microsoft Corp. Xbox360 Controller
-        if d.idVendor == 0x045e and d.idProduct == 0x028e:
+        if d.idVendor == 0x${VENDOR_ID} and d.idProduct == 0x${PRODUCT_ID}:
             d.ctrl_transfer(0xc1, 0x01, 0x0100, 0x00, 0x14)
 finally:
     sys.exit()
@@ -51,7 +55,7 @@ install_udev_rules() {
   echo "Creating udev rules"
 
   sudo tee /etc/udev/rules.d/99-gamesir-g3w-fix.rules > /dev/null << EOF
-ACTION=="add", ATTRS{idProduct}=="028e", ATTRS{idVendor}=="045e", DRIVERS=="usb", RUN+="$gamesir_g3w_fix_script"
+ACTION=="add", ATTRS{idProduct}=="${PRODUCT_ID}", ATTRS{idVendor}=="${VENDOR_ID}", DRIVERS=="usb", RUN+="$gamesir_g3w_fix_script"
 
 EOF
 
@@ -67,5 +71,6 @@ install_gamesir_g3w_fix
 # Install udev rules
 install_udev_rules
 
+echo "If you have your controller already plugged in, unplug and plug it in again for the changes to take effect."
 echo "Done."
 
