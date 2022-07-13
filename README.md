@@ -6,8 +6,13 @@ This controller can work on 2 modes: XBox360 (clone) or Gamesir G3w. On Linux sy
 
 Github user [dnmodder](https://github.com/dnmodder) found a solution to initialize properly the controller.
 This script installs the script and the udev rules so that it is invoked automatically when the controller is connected.
-You need to execute it with a user that can execute sudo or as root. The code is pretty straight forward, so I encourage you to check it first.
 
 Check this thread for more details: https://github.com/paroj/xpad/issues/119
 
 Thanks dnmodder, I had been chasing this problem for months.
+
+## Usage
+Get the script from above and save it somewhere on your Linux computer. You need to execute it with a user that can do `sudo` or as `root`. The code is pretty straight forward, so I encourage you to check it first.
+```
+sudo ./gamesir-g3w-fix-install.bash
+```
