@@ -5,11 +5,11 @@ All-in-one script to fix the issue with the [Gamesir G3w](https://www.gamesir.hk
 This controller can work on 2 modes: XBox360 (clone) or Gamesir G3w. On Linux systems, it seems to start in XBox360 mode by default. Due to some issue on the xpad kernel module with XBox360 clones, the G3w is recognized but does not send any events.
 
 Github user [dnmodder](https://github.com/dnmodder) found a solution to initialize properly the controller.
-This script installs the script and the udev rules so that it is invoked automatically when the controller is connected.
+This script installs the python code that performs the initialization fix and creates the udev rules so that it is invoked automatically when the controller is connected. You just need to execute it once.
 
 Check this thread for more details: https://github.com/paroj/xpad/issues/119
 
-Thanks dnmodder, I had been chasing this problem for months.
+Thanks dnmodder!, I had been chasing this problem for months.
 
 ## Usage
 Get the script from above and execute it. 
