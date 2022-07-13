@@ -12,7 +12,10 @@ Check this thread for more details: https://github.com/paroj/xpad/issues/119
 Thanks dnmodder, I had been chasing this problem for months.
 
 ## Usage
-Get the script from above and save it somewhere on your Linux computer. You need to execute it with a user that can do `sudo` or as `root`. The code is pretty straight forward, so I encourage you to check it first.
+Get the script from above and execute it. 
 ```
+wget https://raw.githubusercontent.com/fcorsino/gamesir-g3w-fix/main/gamesir-g3w-fix-install.bash
 sudo ./gamesir-g3w-fix-install.bash
 ```
+
+The code is pretty straight forward, so I encourage you to check it first.
