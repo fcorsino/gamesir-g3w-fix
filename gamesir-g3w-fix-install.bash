@@ -72,7 +72,7 @@ install_gamesir_g3w_fix
 install_udev_rules
 
 # Run the script once so if there are any errors, they are displayed
-$gamesir_g3w_fix_script
+sudo $gamesir_g3w_fix_script
 
 echo "Done."
 
