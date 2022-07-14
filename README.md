@@ -15,7 +15,7 @@ Thanks dnmodder!, I had been chasing this problem for months.
 Get the script from above and execute it. 
 ```
 wget https://raw.githubusercontent.com/fcorsino/gamesir-g3w-fix/main/gamesir-g3w-fix-install.bash
-./gamesir-g3w-fix-install.bash
+bash ./gamesir-g3w-fix-install.bash
 ```
 
 The script uses sudo where needed. Run it as root if you don't have sudo rights. The code is pretty straight forward, so I encourage you to check it first.
