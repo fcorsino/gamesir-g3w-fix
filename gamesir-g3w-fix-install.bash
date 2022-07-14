@@ -71,6 +71,8 @@ install_gamesir_g3w_fix
 # Install udev rules
 install_udev_rules
 
-echo "If you have your controller already plugged in, unplug and plug it in again for the changes to take effect."
+# Run the script once so if there are any errors, they are displayed
+$gamesir_g3w_fix_script
+
 echo "Done."
 
