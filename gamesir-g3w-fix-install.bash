@@ -2,8 +2,8 @@
 
 set -e
 
-install_prefix="/usr/local/bin"
-gamesir_g3w_fix_script="$install_prefix/gamesir-g3w-fix.py"
+INSTALL_PREFIX="/usr/local/bin"
+GAMESIR_G3W_FIX_SCRIPT="$INSTALL_PREFIX/gamesir-g3w-fix.py"
 
 # Output of lsusb|grep 360 for a Gamesir G3w is:
 # Bus 001 Device 049: ID 045e:028e Microsoft Corp. Xbox360 Controller
@@ -12,13 +12,13 @@ PRODUCT_ID=028e
 
 install_gamesir_g3w_fix() {
 
-  echo "Creating fix script for Gamesir G3w"
+  echo "Creating fix script for Gamesir G3w in $GAMESIR_G3W_FIX_SCRIPT"
 
-  if [ ! -d "$install_prefix" ]; then
-    sudo mkdir -pv $install_prefix
+  if [ ! -d "$INSTALL_PREFIX" ]; then
+    sudo mkdir -pv $INSTALL_PREFIX
   fi
 
-  sudo tee "$gamesir_g3w_fix_script" > /dev/null << EOF
+  sudo tee "$GAMESIR_G3W_FIX_SCRIPT" > /dev/null << EOF
 #!/usr/bin/python3
 
 # Script found on the first post in https://github.com/paroj/xpad/issues/119
@@ -46,16 +46,16 @@ finally:
 
 EOF
 
-  sudo chmod +x "$gamesir_g3w_fix_script"
+  sudo chmod +x "$GAMESIR_G3W_FIX_SCRIPT"
 
 }
 
 install_udev_rules() {
 
-  echo "Creating udev rules"
+  echo "Creating udev rules in /etc/udev/rules.d/99-gamesir-g3w-fix.rules"
 
   sudo tee /etc/udev/rules.d/99-gamesir-g3w-fix.rules > /dev/null << EOF
-ACTION=="add", ATTRS{idProduct}=="${PRODUCT_ID}", ATTRS{idVendor}=="${VENDOR_ID}", DRIVERS=="usb", RUN+="$gamesir_g3w_fix_script"
+ACTION=="add", ATTRS{idProduct}=="${PRODUCT_ID}", ATTRS{idVendor}=="${VENDOR_ID}", DRIVERS=="usb", RUN+="$GAMESIR_G3W_FIX_SCRIPT"
 
 EOF
 
@@ -72,7 +72,8 @@ install_gamesir_g3w_fix
 install_udev_rules
 
 # Run the script once so if there are any errors, they are displayed
-sudo $gamesir_g3w_fix_script
+echo "Executing $GAMESIR_G3W_FIX_SCRIPT"
+sudo $GAMESIR_G3W_FIX_SCRIPT
 
 echo "Done."
 
