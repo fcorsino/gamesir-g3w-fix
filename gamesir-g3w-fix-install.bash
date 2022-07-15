@@ -11,17 +11,23 @@ VENDOR_ID=045e
 PRODUCT_ID=028e
 
 install_dependencies() {
+
   if which dpkg > /dev/null; then
+
     # Install the system package for pyusb on Debian,Ubuntu and derived distros.
     if ! dpkg -S python3-usb; then
       echo "Installing python3-usb with apt"
       sudo apt install -y python3-usb
     fi
+
   else
-    # Install the pip package for pyusb on non-Debian distros.
+
+    # Install the pip package for pyusb on non-Debian systems.
     echo "Installing pyusb with pip"
     sudo pip install pyusb
+
   fi
+
 }
 
 install_gamesir_g3w_fix() {
