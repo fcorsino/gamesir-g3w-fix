@@ -10,6 +10,20 @@ GAMESIR_G3W_FIX_SCRIPT="$INSTALL_PREFIX/gamesir-g3w-fix.py"
 VENDOR_ID=045e
 PRODUCT_ID=028e
 
+install_dependencies() {
+  if which dpkg > /dev/null; then
+    # Install the system package for pyusb on Debian,Ubuntu and derived distros.
+    if ! dpkg -S python3-usb; then
+      echo "Installing python3-usb with apt"
+      sudo apt install -y python3-usb
+    fi
+  else
+    # Install the pip package for pyusb on non-Debian distros.
+    echo "Installing pyusb with pip"
+    sudo pip install pyusb
+  fi
+}
+
 install_gamesir_g3w_fix() {
 
   echo "Creating fix script for Gamesir G3w in $GAMESIR_G3W_FIX_SCRIPT"
@@ -64,6 +78,8 @@ EOF
   sudo systemctl restart systemd-udevd.service
 
 }
+
+install_dependencies
 
 # Install Gamesir G3w fix script
 install_gamesir_g3w_fix
