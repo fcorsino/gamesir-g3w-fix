@@ -80,7 +80,6 @@ ACTION=="add", ATTRS{idProduct}=="${PRODUCT_ID}", ATTRS{idVendor}=="${VENDOR_ID}
 EOF
 
   echo "Restarting systemd-udevd"
-
   sudo systemctl restart systemd-udevd.service
 
 }
