@@ -23,6 +23,12 @@ install_dependencies() {
   else
 
     # Install the pip package for pyusb on non-Debian systems.
+    if ! which pip; then
+      if [ -f /etc/arch-release ]; then
+        # Asume we are running in ArchLinux or derivate
+        sudo pacman -Sy --noconfirm python-pip
+      fi
+    fi
     echo "Installing pyusb with pip"
     sudo pip install pyusb
 
